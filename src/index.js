@@ -5,16 +5,20 @@ import Theme from './assets/material_ui/Theme';
 import RTL from './assets/material_ui/RTL';
 import { BrowserRouter as Router } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import store from './store/configureStore';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Theme>
-        <RTL>
-          <App />
-        </RTL>
-      </Theme>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Theme>
+          <RTL>
+            <App />
+          </RTL>
+        </Theme>
+      </Router>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
