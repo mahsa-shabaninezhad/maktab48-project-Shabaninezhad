@@ -1,10 +1,10 @@
 import React from 'react'
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
 import '../fonts/fontFace.css'
 import { faIR } from '@material-ui/core/locale';
 
-const theme = createMuiTheme({
+const theme = createTheme({
   direction: 'rtl',
   typography: {
     fontFamily: 'Yekan, san-serif',
