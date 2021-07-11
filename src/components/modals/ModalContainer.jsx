@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { Paper, Typography } from '@material-ui/core';
-import { closeModal} from '../store/actions/modalActions'
+import { closeModal} from '../../store/actions/modalActions'
 import CancelIcon from '@material-ui/icons/Cancel';
-import Icon from './Icon'
+import Icon from '../Icon'
 
 
 const useStyle = makeStyles(theme => ({
@@ -15,8 +15,7 @@ const useStyle = makeStyles(theme => ({
     top: '50%',
     left: '50%',
     transform: 'translate(-50%,-50%)',
-    width: props => props.width || '500px',
-    height: props => props.height || '450px',
+    width: 'max-content',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-evenly',
@@ -26,18 +25,18 @@ const useStyle = makeStyles(theme => ({
   header: {
     display: 'flex', 
     justifyContent: 'space-between', 
-    width: '100%'
+    width: '100%',
+    marginBottom: theme.spacing(2)
   }
 }))
 
-const CustomModal = (props) => {
+const ModalContainer = (props) => {
     const classes = useStyle(props)
 
     const dispatch = useDispatch()
     const {isModalShowing, modalContent, modalHeader} = useSelector(state => state.modal)
 
     const handleCloseModal = (e) => {
-    //  e.stopPropagation()
       dispatch(closeModal())
     }
 
@@ -64,4 +63,4 @@ CustomModal.propTypes = {
   children: PropTypes.element
 }
 
-export default CustomModal
+export default ModalContainer
