@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
-import AdminPanelLayout from './AdminPanelLayout'
-import StoreLayout from './StoreLayout'
+import AdminPanelLayout from './Layouts/AdminPanelLayout'
+import StoreLayout from './Layouts/StoreLayout'
 
 
 export const AdminPanelRoute = ({component: Component, ...rest}) => {
