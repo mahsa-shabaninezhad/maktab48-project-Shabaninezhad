@@ -59,7 +59,7 @@ const ModalContainer = (props) => {
     )
 }
 
-CustomModal.propTypes = {
+ModalContainer.propTypes = {
   children: PropTypes.element
 }
 
