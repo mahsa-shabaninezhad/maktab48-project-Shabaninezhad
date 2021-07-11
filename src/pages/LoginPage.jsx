@@ -1,11 +1,12 @@
 import React from 'react'
-import { Typography, Button, TextField, Paper, Link } from '@material-ui/core';
+import { Typography, Button, TextField, Paper, Link, useMediaQuery } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useLocation, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { adminLogin } from '../store/actions/adminActions';
 import useForm from '../hooks/useForm';
 import login from '../api/authAxios'
+import Form from '../components/Form';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,28 +18,16 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         width: '500px',
+        '@media screen and (max-width: 600px)': {width: '80%'},
         height: '450px',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-evenly',
         alignItems: 'center'
     },
-    form: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: theme.spacing(2), 
-        width: '400px',
-        
-        '& > *:not(:last-child)': {
-          margin: theme.spacing(1.5),
-          minWidth: '25ch',
-        },
-    },
     backBtn: {
         alignSelf: 'flex-end',
-        textAlign: 'center',
+        textAlign: 'right',
         width: 'max-content',
         marginTop: theme.spacing(3),
         cursor: 'pointer'
@@ -51,7 +40,7 @@ const LoginPage = (props) => {
     const history = useHistory()
     const {state} = useLocation()
     const dispatch = useDispatch()
-
+    const tablet = useMediaQuery('(max-width:500px)');
     //form validation hook
     const {data, errors, handleChange, handleSubmit} = useForm({
         initialValues: {
@@ -95,10 +84,10 @@ const LoginPage = (props) => {
     return (
         <div className={classes.root}>
             <Paper className={classes.paper} elevation={3} >
-                <Typography variant='h4' component='h2'>
+                <Typography variant={tablet? 'h5' : 'h4'} component='h2'>
                     ورود به پنل مدیریت فروشگاه
                 </Typography>
-                <form className={classes.form} noValidate autoComplete="off" onSubmit={handleSubmit}>
+                <Form className={classes.form} noValidate autoComplete="off" onSubmit={handleSubmit} width='75%'>
                     <TextField 
                         id="userName" 
                         label="نام کاربری" 
@@ -127,7 +116,7 @@ const LoginPage = (props) => {
                     />
                     <Button  type="submit" variant="contained" color="secondary">ورود</Button>
                     <Link onClick={() => history.push('/')}  color="primary" className={classes.backBtn}>بازگشت به سایت</Link>
-                </form>
+                </Form>
 
             </Paper>
         </div>
