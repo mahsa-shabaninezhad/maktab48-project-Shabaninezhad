@@ -11,6 +11,7 @@ import AdminPanelQuantityPage from "./pages/AdminPanelQuantityPage";
 import AdminPanelOrdersPage from "./pages/AdminPanelOrdersPage";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
+import CustomModal from "./components/CustomModal";
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
         <AdminPanelRoute exact path="/adminPanel/orders" component={AdminPanelOrdersPage}/>
       </Switch>
       
+      <CustomModal/>
       <ToastContainer/>
 
     </div>
