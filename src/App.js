@@ -1,17 +1,17 @@
 import { Switch, Route } from "react-router-dom";
 import { AdminPanelRoute, StoreRoute } from "./components/Routes";
 import LoginPage from "./pages/LoginPage";
-import BasketPage from "./pages/BasketPage";
-import CheckoutPage from "./pages/CheckoutPage";
-import ProductPage from "./pages/ProductPage";
-import ProductsPage from "./pages/ProductsPage";
-import LandingPage from "./pages/LandingPage";
-import AdminPanelProductPage from "./pages/AdminPanelProductPage";
-import AdminPanelQuantityPage from "./pages/AdminPanelQuantityPage";
-import AdminPanelOrdersPage from "./pages/AdminPanelOrdersPage";
+import BasketPage from "./pages/store/BasketPage";
+import CheckoutPage from "./pages/store/CheckoutPage";
+import ProductPage from "./pages/store/ProductPage";
+import ProductsPage from "./pages/store/ProductsPage";
+import LandingPage from "./pages/store/LandingPage";
+import AdminPanelProductPage from "./pages/web/AdminPanelProductPage";
+import AdminPanelQuantityPage from "./pages/web/AdminPanelQuantityPage";
+import AdminPanelOrdersPage from "./pages/web/AdminPanelOrdersPage";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
-import CustomModal from "./components/CustomModal";
+import ModalContainer from "./components/modals/ModalContainer";
 
 function App() {
 
@@ -28,8 +28,7 @@ function App() {
         <AdminPanelRoute exact path="/adminPanel/price&inventory" component={AdminPanelQuantityPage}/>
         <AdminPanelRoute exact path="/adminPanel/orders" component={AdminPanelOrdersPage}/>
       </Switch>
-      
-      <CustomModal/>
+      <ModalContainer/>
       <ToastContainer/>
 
     </div>
