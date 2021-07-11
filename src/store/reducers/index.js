@@ -6,5 +6,5 @@ import { productsReducer } from "./productsReducer";
 export const rootReducer = combineReducers({
     admin: adminReducer,
     products: productsReducer,
-    
+    modal: modalReducer
 })
