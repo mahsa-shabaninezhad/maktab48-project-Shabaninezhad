@@ -29,7 +29,7 @@ function App() {
         <AdminPanelRoute exact path="/adminPanel/orders" component={AdminPanelOrdersPage}/>
       </Switch>
       <ModalContainer/>
-      <ToastContainer/>
+      <ToastContainer rtl position='bottom-left'/>
 
     </div>
   );
