@@ -16,7 +16,7 @@ productAxios.interceptors.response.use(function (response) {
                 toast.success(`${response.data.model} با موفقیت اضافه شد.`)
                 break;
             case 'put':
-                toast.success('تغییرات با موفقیت اعمال شد')
+                toast.success(`${response.data.model} با موفقیت به روزرسانی شد.`)
                 break;
             case 'delete':
                 toast.success(`حذف با موفقیت انجام شد.`)
@@ -25,10 +25,9 @@ productAxios.interceptors.response.use(function (response) {
                 break;
         }
     }
-
-    console.log(response);
+    // console.log(response);
     return response
-
+    
 }, function (error) {
     if (error.response) {
         console.log(error.response.data.error);
