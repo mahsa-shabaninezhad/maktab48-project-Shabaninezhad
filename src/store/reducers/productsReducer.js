@@ -1,7 +1,6 @@
 import { ActionTypes } from "../constants/action-types";
 const initialState = {
     productsList: [],
-    needEditProduct: false,
     deletedProduct: false,
     editCellsList: [],
     editCellsListBuffer: null
@@ -14,12 +13,6 @@ export const productsReducer = (state= initialState, {type, payload}) => {
 
         case ActionTypes.ADD_A_PRODUCT:
             return {...state, productsList: [...state.productsList, payload]};
-
-        case ActionTypes.START_EDITING_A_PRODUCT:
-            return {...state, needEditProduct: payload};
-
-        case ActionTypes.FINISH_EDITING_A_PRODUCT:
-            return {...state, needEditProduct: false};
 
         case ActionTypes.DELETE_A_PRODUCT:
             return {...state, productsList: state.productsList.filter(product => product.id !== payload), deletedProduct: false};

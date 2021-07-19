@@ -18,10 +18,6 @@ export const modalReducer = (state= initialState, {type, payload}) => {
         
         case ActionTypes.DELETE_A_PRODUCT:
             return {isModalShowing: false, modalContent: null, modalHeader: null};
-        
-        case ActionTypes.FINISH_EDITING_A_PRODUCT:
-            return {isModalShowing: false, modalContent: null, modalHeader: ''};
-        
     
         default:
             return state;

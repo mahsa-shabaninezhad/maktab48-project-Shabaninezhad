@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Button, TextField, MenuItem, InputBase, Typography } from '@material-ui/core'
-import { useDispatch, useSelector } from 'react-redux'
+import { Button, TextField, MenuItem, InputBase } from '@material-ui/core'
+import { useDispatch } from 'react-redux'
 import useForm from '../../hooks/useForm'
 import Form from '../Form'
 
@@ -23,23 +23,20 @@ const categories = [
 ]
 
 
-const AddOrEditProductModal = props => {
+const AddOrEditProductModal = ({neadEditProduct}) => {
     const [image, setImage] = useState(null)
     const dispatch = useDispatch()
 
-    //geting neadEditProduct from state to figure out if editing existing product or adding new one
-    const neadEditing = useSelector(state => state.products.needEditProduct)
-
     //initial state according to edit mode or add mode
-    const initialValues = neadEditing
+    const initialValues = neadEditProduct
     ?{
-        model: neadEditing.model,
-        category: neadEditing.category,
-        brand: neadEditing.brand,
-        description: neadEditing.description
+        title: neadEditProduct.title,
+        category: neadEditProduct.category,
+        brand: neadEditProduct.brand,
+        description: neadEditProduct.description
     } 
     :{
-        model: '',
+        title: '',
         category: 'گوشی موبایل',
         brand: '',
         description: ''
@@ -50,7 +47,7 @@ const AddOrEditProductModal = props => {
     const {data, errors, handleChange, handleSubmit} = useForm({
         initialValues,
         validations: {
-            model:{
+            title:{
                 required: {
                     value: true,
                     message: 'نام کالا الزامی می باشد.'
@@ -69,7 +66,7 @@ const AddOrEditProductModal = props => {
 
     //checkig which action needs to be dispach edit or add
     const handleSave = () => {
-        neadEditing ? dispatch(editAProduct(neadEditing.id, {...neadEditing, ...data, image})) : dispatch(addAProduct({...data, image}))
+        neadEditProduct ? dispatch(editAProduct(neadEditProduct.id, {...neadEditProduct, ...data, image})) : dispatch(addAProduct({...data, image}))
     }
 
     const handleTransformImageToBase64 = (e) => {
@@ -94,10 +91,10 @@ const AddOrEditProductModal = props => {
                 type='text'
                 required
                 variant="outlined" 
-                value={data['model'] || ''}
-                onChange={handleChange('model')}
-                error={Boolean(errors['model']) || false} 
-                helperText={errors['model'] || ''}
+                value={data['title'] || ''}
+                onChange={handleChange('title')}
+                error={Boolean(errors['title']) || false} 
+                helperText={errors['title'] || ''}
                 fullWidth={true} 
                 margin='dense'
                 autoFocus

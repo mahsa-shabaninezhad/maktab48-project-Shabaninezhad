@@ -13,10 +13,10 @@ productAxios.interceptors.response.use(function (response) {
         console.log(response.data);
         switch (response.config.method) {
             case 'post':
-                toast.success(`${response.data.model} با موفقیت اضافه شد.`)
+                toast.success(`${response.data.title} با موفقیت اضافه شد.`)
                 break;
             case 'put':
-                toast.success(`${response.data.model} با موفقیت به روزرسانی شد.`)
+                toast.success(`${response.data.title} با موفقیت به روزرسانی شد.`)
                 break;
             case 'delete':
                 toast.success(`حذف با موفقیت انجام شد.`)

@@ -65,11 +65,6 @@ const ProductsTable = ({data, headers}) => {
       setPage(0);
   };
 
-  const handleEditAProduct = (product) => {
-    dispatch(startEditAProduct(product))
-    dispatch(openModal(<AddOrEditProductModal/>,'افزودن/ویرایش کالا'))
-  }
-
   const handleDeleteAProduct = (product) => {
     dispatch(selectProductToDelete(product))
     dispatch(openModal(<DeleteModal/>))
@@ -91,19 +86,16 @@ const ProductsTable = ({data, headers}) => {
                 {(rowsPerPage > 0
                   ?data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) 
                   :data
-                  ).map((product, index) => {
-                    // console.log(product);
-                    return (
-                  <StyledTableRow className={classes.table__row} key={product.id}>
+                  ).map((product) => <StyledTableRow className={classes.table__row} key={product.id}>
                     <TableCell><img className={classes.image} src={product.image}/></TableCell>
-                    <TableCell>{product.model}</TableCell>
+                    <TableCell>{product.title}</TableCell>
                     <TableCell>{[product.category,product.brand].join('/')}</TableCell>
                     <TableCell>
-                      <Icon component={EditIcon} color='green' onClick={() => handleEditAProduct(product)}/>
+                      <Icon component={EditIcon} color='green' onClick={() => dispatch(openModal(<AddOrEditProductModal neadEditProduct={product}/>,'افزودن/ویرایش کالا'))}/>
                       <Icon component={DeleteIcon} color='red' onClick={() => handleDeleteAProduct(product)}/>
                     </TableCell>
                   </StyledTableRow>
-                )})}
+                )}
               
                 {emptyRows > 0 && (
                   <TableRow style={{ height: 53 * emptyRows }}>
