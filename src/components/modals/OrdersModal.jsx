@@ -14,6 +14,9 @@ const useStyle = makeStyles(theme => ({
         alignItems: 'center',
         "& > *:not(:last-child)": {
             marginBottom: theme.spacing(2)
+        },
+        '@media screen and (max-width: 500px)': {
+            width: '250px'
         }
     },
     ul: {
