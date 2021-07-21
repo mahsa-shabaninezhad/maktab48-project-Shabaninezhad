@@ -30,7 +30,7 @@ const useStyle = makeStyles(theme => ({
   }
 }))
 
-const ModalContainer = (props) => {
+const ModalContainer = ({children, close, isOpen, ...props}) => {
     const classes = useStyle(props)
 
     const dispatch = useDispatch()
@@ -42,8 +42,8 @@ const ModalContainer = (props) => {
 
     return (
         <Modal
-            open={isModalShowing}
-            onClose={!isModalShowing}
+            open={isOpen || isModalShowing}
+            onClose={isOpen || !isModalShowing}
             aria-labelledby="modal-title"
         >
             <Paper  className={classes.paper} elevation={3}>
@@ -51,9 +51,9 @@ const ModalContainer = (props) => {
                     <Typography id='modal-title' variant='h6' component='h3'>
                       {modalHeader}
                     </Typography>
-                    <Icon component={CancelIcon} margin='0' onClick={handleCloseModal}/>
+                    <Icon component={CancelIcon} margin='0' onClick={close || handleCloseModal}/>
               </div>
-                {modalContent}
+                {children || modalContent}
             </Paper>
         </Modal>
     )
