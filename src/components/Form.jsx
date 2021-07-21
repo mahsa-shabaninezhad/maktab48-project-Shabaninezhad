@@ -6,11 +6,20 @@ const useStyles = makeStyles((theme) => ({
     
     form: {
         display: 'flex',
+        padding: props => props.padding || '',
         flexDirection: 'column',
-        justifyContent: 'center',
+        justifyContent: props => props.justifyContent || 'center',
         alignItems: 'center',
         width: props => props.width || '100%',
-        
+        height: props => props.height || 'min-content',
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        '&::-webkit-scrollbar': {
+            width: '2px',
+        },
+        "&::-webkit-scrollbar-thumb": {
+            background: theme.palette.secondary.main
+        },
         '& > *': {
           margin: theme.spacing(1.5),
           minWidth: '50%',
@@ -27,14 +36,6 @@ const Form = ({children, header = null, onSubmit, ...props}) => {
         <form className={classes.form} onSubmit={onSubmit} noValidate autoComplete="off">
             {children}
         </form>
-        // <Paper className={classes.paper} elevation={3}>
-        //     {header && <Typography variant='h4' component='h2'>
-        //         {header}
-        //     </Typography>}
-        //     <form className={classes.form} onSubmit={onSubmit} noValidate autoComplete="off">
-        //         {children}
-        //     </form>
-        // </Paper>
     )
 }
 
