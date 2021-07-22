@@ -171,7 +171,7 @@ const PhoneDetails = ({properties, save}) => {
             <FormLabel component="legend">حافظه داخلی</FormLabel>
             <RadioGroup aria-label="gender" className={classes.formGroup} name="memory" value={data['حافظه داخلی'] || '128 گیگابایت'} onChange={handleChange('حافظه داخلی')}>
               <FormControlLabel value="1 ترابایت" control={<Radio />} label="1 ترابایت" />
-              <FormControlLabel value="500 گیگابایت" control={<Radio />} label="500 گیگابایت" />
+              <FormControlLabel value="512 گیگابایت" control={<Radio />} label="512 گیگابایت" />
               <FormControlLabel value="256 گیگابایت" control={<Radio />} label="256 گیگابایت" />
               <FormControlLabel value="128 گیگابایت" control={<Radio />} label="128 گیگابایت" />
               <FormControlLabel value="64 گیگابایت" control={<Radio />} label="64 گیگابایت" />
