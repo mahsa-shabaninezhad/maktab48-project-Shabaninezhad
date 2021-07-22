@@ -207,6 +207,9 @@ const LaptopDetails = ({properties, save}) => {
               <MenuItem value='Ryzen 3'>
                 Ryzen 3
               </MenuItem>
+              <MenuItem value='M1'>
+                M1
+              </MenuItem>
             </TextField>
             
             <TextField
