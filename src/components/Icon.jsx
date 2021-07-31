@@ -5,7 +5,7 @@ import React from 'react'
 const useStyle = makeStyles(theme => ({
     icon:{
         cursor: 'pointer',
-        color: props => props.color || theme.palette.primary.main,
+        color: props => props.color || theme.palette.secondary.main,
         margin: props => props.margin || theme.spacing(1),
         transition: 'transfom .2s',
         '&:hover':{
