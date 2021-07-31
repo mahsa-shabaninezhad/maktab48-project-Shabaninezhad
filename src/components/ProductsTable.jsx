@@ -7,10 +7,12 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Icon from './Icon';
 import { useDispatch } from 'react-redux';
-import { selectProductToDelete, startEditAProduct } from '../store/actions/productAtions';
+import { selectProductToDelete, startEditAProduct, toggleFavorite } from '../store/actions/productAtions';
 import { openModal } from '../store/actions/modalActions';
 import AddOrEditProductModal from './modals/AddOrEditProductModal';
 import DeleteModal from './modals/DeleteModal';
+import StarIcon from '@material-ui/icons/Star';
+import StarOutlineIcon from '@material-ui/icons/StarOutline';
 
 //Styles
 const useStyles = makeStyles(theme => ({
@@ -19,13 +21,10 @@ const useStyles = makeStyles(theme => ({
   },
   table: {
     minWidth: 650,
-    borderColor: "#90E0EF",
-    borderColor:  theme.palette.info.light
   },
   table__row: {
     '&:hover': {
       backgroundColor: `${theme.palette.action.selected} !important`,
-      
     }
   },
   image: {
@@ -93,6 +92,10 @@ const ProductsTable = ({data, headers}) => {
                     <TableCell>
                       <Icon component={EditIcon} color='green' onClick={() => dispatch(openModal(<AddOrEditProductModal neadEditProduct={product}/>,'افزودن/ویرایش کالا'))}/>
                       <Icon component={DeleteIcon} color='red' onClick={() => handleDeleteAProduct(product)}/>
+                      {
+                        product.favorite?<Icon component={StarIcon} color='#fd0' onClick={() => dispatch(toggleFavorite({...product, favorite: false}))}/>
+                        :<Icon component={StarOutlineIcon} color='gray' onClick={() => dispatch(toggleFavorite({...product, favorite: true}))}/>
+                      }
                     </TableCell>
                   </StyledTableRow>
                 )}
