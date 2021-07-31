@@ -17,10 +17,10 @@ login.interceptors.response.use(function (response) {
 
 }, function (error) {
     if (error.response) {
-        window.location.reload()
         toast.error(error.response.data.error)
+    }else{
+        toast.error('مشکلی پیش آمده است. دوباره تلاش کنید.')
     }
-
     return Promise.reject(error)
 })
 
