@@ -121,4 +121,11 @@ export const editAProduct = (id, data) =>  (dispatch, getState) => {
     })
 }
 
+export const toggleFavorite = (product) =>  (dispatch, getState) => {
+    productAxios.put(`/${product.id}`, product).then(res => {
+        dispatch(getAllProducts())
+    })
+}
+
+
 
