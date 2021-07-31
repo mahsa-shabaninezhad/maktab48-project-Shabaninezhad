@@ -31,8 +31,8 @@ const DeleteModal = () => {
             </Typography>
             <Divider variant="middle" />
             <div className={classes.buttons}>
-                <Button color='secondary' onClick={() => dispatch(closeModal())}>خیر</Button>
-                <Button color='primary' onClick={() => dispatch(deleteAProduct(deletedProduct))}>بله</Button>
+                <Button onClick={() => dispatch(closeModal())}>خیر</Button>
+                <Button onClick={() => dispatch(deleteAProduct(deletedProduct))}>بله</Button>
             </div>
         </div>
     )

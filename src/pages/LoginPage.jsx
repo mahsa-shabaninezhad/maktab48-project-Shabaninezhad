@@ -100,7 +100,8 @@ const LoginPage = (props) => {
                         helperText={errors['userName'] || ''}
                         fullWidth={true} 
                         margin='dense'
-                        />
+                        color='secondary'
+                    />
                     <TextField 
                         id="password" 
                         label="رمز عبور" 
@@ -113,9 +114,10 @@ const LoginPage = (props) => {
                         helperText={errors['password'] || ''}
                         fullWidth={true} 
                         margin='dense'
+                        color='secondary'
                     />
                     <Button  type="submit" variant="contained" color="secondary">ورود</Button>
-                    <Link onClick={() => history.push('/')}  color="primary" className={classes.backBtn}>بازگشت به سایت</Link>
+                    <Link onClick={() => history.push('/')}  color="secondary" className={classes.backBtn}>بازگشت به سایت</Link>
                 </Form>
 
             </Paper>

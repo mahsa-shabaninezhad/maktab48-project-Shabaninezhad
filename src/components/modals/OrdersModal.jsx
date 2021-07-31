@@ -45,7 +45,7 @@ const OrdersModal = ({data}) => {
                 <li>زمان سفارش: {data.orderTime}</li>
             </ul>
             <Table orders={data.card}/>
-            {data.deliveryStatus === 'delivered' ? <p>زمان تحویل: {data.deliveryTime}</p> : <Button variant='contained' color='primary' onClick={() => dispatch(changeDeliveryStatus(data.id, {...data, deliveryStatus: "delivered"}))}>تحویل شد</Button>}
+            {data.deliveryStatus === 'delivered' ? <p>زمان تحویل: {data.deliveryTime}</p> : <Button variant='contained' color='secondary' onClick={() => dispatch(changeDeliveryStatus(data.id, {...data, deliveryStatus: "delivered"}))}>تحویل شد</Button>}
         </div>
     )
 }

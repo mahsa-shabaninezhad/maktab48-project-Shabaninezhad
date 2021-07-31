@@ -150,6 +150,7 @@ const AddOrEditProductModal = ({neadEditProduct}) => {
                     fullWidth={true} 
                     margin='dense'
                     autoFocus
+                    color='secondary'
                 />
                 <TextField 
                     label="مدل" 
@@ -162,6 +163,7 @@ const AddOrEditProductModal = ({neadEditProduct}) => {
                     helperText={errors['model'] || ''}
                     fullWidth={true} 
                     margin='dense'
+                    color='secondary'
                 />
                 <TextField
                     label="دسته بندی" 
@@ -171,6 +173,7 @@ const AddOrEditProductModal = ({neadEditProduct}) => {
                     onChange={handleChange('category')}
                     fullWidth={true} 
                     margin='dense'
+                    color='secondary'
                 >
                     {categories.map((option) => (
                       <MenuItem key={option.value} value={option.value}>
@@ -187,9 +190,10 @@ const AddOrEditProductModal = ({neadEditProduct}) => {
                     margin='dense'
                     error={Boolean(errors['brand']) || false} 
                     helperText={errors['brand'] || ''}
+                    color='secondary'
                 />
-                <Button type='button' color="primary"  onClick={handleOpen} style={{alignSelf: 'flex-start', minWidth: '0px', margin: '8px 0'}}>افزودن جزئیات</Button>
-                <Button type='submit' color="primary" variant='contained' >ذخیره</Button>
+                <Button type='button' color="secondary"  onClick={handleOpen} style={{alignSelf: 'flex-start', minWidth: '0px', margin: '8px 0'}}>افزودن جزئیات</Button>
+                <Button type='submit' color="secondary" variant='contained' >ذخیره</Button>
             </Form>
             {openModal && <ModalContainer close={handleClose} isOpen={openModal}>
                 {renderModalByCategory()}
