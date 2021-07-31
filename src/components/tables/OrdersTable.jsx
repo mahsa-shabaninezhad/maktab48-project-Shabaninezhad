@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import { Table, TableBody, TableCell, TableContainer, TableHead, InputBase,
-TableRow, TableFooter, Paper, TablePagination, Typography, Link} from '@material-ui/core';
+import { Table, TableBody, TableCell, TableContainer, TableHead,
+TableRow, TableFooter, Paper, TablePagination, Link} from '@material-ui/core';
 import Pagination from '../Pagination';
 import { useDispatch, useSelector } from 'react-redux';
-import { addACellToEditList, applyCellEditingMode, cancelEditACell, deleteACellFromEditList, editACell } from '../../store/actions/productAtions';
 import { openModal } from '../../store/actions/modalActions';
 import OrdersModal from '../modals/OrdersModal';
 
@@ -99,7 +98,7 @@ const OrdersTable = (props) => {
                       {order.orderTime}
                     </TableCell>
                     <TableCell >
-                      <Link style={{cursor: 'pointer'}} onClick={() => dispatch(openModal(<OrdersModal data={order}/>, 'نمایش سفارش'))}>بررسی سفارش</Link>
+                      <Link style={{cursor: 'pointer'}} color='secondary' onClick={() => dispatch(openModal(<OrdersModal data={order}/>, 'نمایش سفارش'))}>بررسی سفارش</Link>
                     </TableCell>
                   </StyledTableRow>
                 )}
