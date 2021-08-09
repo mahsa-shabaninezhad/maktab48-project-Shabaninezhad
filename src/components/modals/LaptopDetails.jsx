@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import useForm from '../../hooks/useForm'
 import Form from '../Form'
 import { TextField, MenuItem, FormControlLabel , FormLabel, FormControl, 
@@ -39,7 +39,7 @@ const LaptopDetails = ({properties, save}) => {
         'سیستم عامل': '',
         'اندازه صفحه نمایش': '',
         'دقت صفحه نمایش': '',
-        'NVIDIA': 'سازنده پردازنده گرافیکی',
+        'سازنده پردازنده گرافیکی': 'NVIDIA',
         'سری پردازنده': 'core i7',
         'نوع حافظه RAM': 'DDR4',
         'ظرفیت حافظه RAM': '16 گیگابایت',
@@ -91,6 +91,7 @@ const LaptopDetails = ({properties, save}) => {
                 margin='dense'
                 value={data['نوع'] || 'نوت بوک (لپ تاپ)'}
                 onChange={handleChange('نوع')}
+                color='secondary'
             >
               <MenuItem value='نوت بوک (لپ تاپ)'>
                 نوت بوک (لپ تاپ)
@@ -117,6 +118,7 @@ const LaptopDetails = ({properties, save}) => {
               onChange={handleChange('سیستم عامل')}
               error={Boolean(errors['سیستم عامل']) || false} 
               helperText={errors['سیستم عامل'] || ''}
+              color='secondary'
             />
 
             <TextField  
@@ -129,6 +131,7 @@ const LaptopDetails = ({properties, save}) => {
               onChange={handleChange('دقت صفحه نمایش')}
               error={Boolean(errors['دقت صفحه نمایش']) || false} 
               helperText={errors['دقت صفحه نمایش'] || ''}
+              color='secondary'
             />
             <TextField  
               label='اندازه صفحه نمایش'
@@ -140,6 +143,7 @@ const LaptopDetails = ({properties, save}) => {
               onChange={handleChange('اندازه صفحه نمایش')}
               error={Boolean(errors['اندازه صفحه نمایش']) || false} 
               helperText={errors['اندازه صفحه نمایش'] || ''}
+              color='secondary'
             />
 
             <TextField
@@ -150,6 +154,7 @@ const LaptopDetails = ({properties, save}) => {
                 margin='dense'
                 value={data['سازنده پردازنده گرافیکی'] || 'NVIDIA'}
                 onChange={handleChange('سازنده پردازنده گرافیکی')}
+                color='secondary'
             >
               <MenuItem value='NVIDIA'>
                 NVIDIA
@@ -179,6 +184,7 @@ const LaptopDetails = ({properties, save}) => {
                 margin='dense'
                 value={data['سری پردازنده'] || 'core i7'}
                 onChange={handleChange('سری پردازنده')}
+                color='secondary'
             >
               <MenuItem value='core i9'>
                 core i9
@@ -220,6 +226,7 @@ const LaptopDetails = ({properties, save}) => {
                 margin='dense'
                 value={data['نوع حافظه RAM'] || 'DDR4'}
                 onChange={handleChange('نوع حافظه RAM')}
+                color='secondary'
             >
               <MenuItem value='DDR4'>
                 DDR4
@@ -240,7 +247,7 @@ const LaptopDetails = ({properties, save}) => {
                 LPDDR4
               </MenuItem>
               <MenuItem value='LPDDR3'>
-                LPDDR4
+                LPDDR3
               </MenuItem>
             </TextField>
 
@@ -285,8 +292,8 @@ const LaptopDetails = ({properties, save}) => {
             </FormControl>
 
             <FormControl component="fieldset" fullWidth={true}>
-              <FormLabel component="legend">پورت HTMI</FormLabel>
-              <RadioGroup aria-label="gender" className={classes.formGroup} name="simNumber" value={data['پورت HTMI'] || 'خیر'} onChange={handleChange('پورت HTMI')}>
+              <FormLabel component="legend">پورت HDMI</FormLabel>
+              <RadioGroup aria-label="gender" className={classes.formGroup} name="simNumber" value={data['پورت HDMI'] || 'خیر'} onChange={handleChange('پورت HDMI')}>
                 <FormControlLabel value='بله' control={<Radio />} label="بله" />
                 <FormControlLabel value='خیر' control={<Radio />} label="خیر" />
               </RadioGroup>

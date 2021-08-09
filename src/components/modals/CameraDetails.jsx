@@ -32,7 +32,7 @@ const CameraDetails = ({properties, save}) => {
         'لرزشگیر تصویر': properties['لرزشگیر تصویر'],
         'ضد آب': properties['ضد آب'],
         'چشمی': properties['چشمی'],
-        'تصویر زنده (Live View)': properties['تصویر زنده'],
+        'تصویر زنده (Live View)': properties['تصویر زنده (Live View)'],
         'صفحه نمایش لمسی': properties['صفحه نمایش لمسی'],
         'تکنولوژی بی سیم': properties['تکنولوژی بی سیم'],
     }:{
@@ -101,6 +101,7 @@ const CameraDetails = ({properties, save}) => {
                 margin='dense'
                 value={data['نوع'] || 'DSLR'}
                 onChange={handleChange('نوع')}
+                color='secondary'
             >
               <MenuItem value='کامپکت'>
                 کامپکت
@@ -124,6 +125,7 @@ const CameraDetails = ({properties, save}) => {
                 margin='dense'
                 value={data['قطع حسگر'] || 'Full Frame'}
                 onChange={handleChange('قطع حسگر')}
+                color='secondary'
             >
               <MenuItem value='Full Frame'>
                 Full Frame
@@ -143,6 +145,7 @@ const CameraDetails = ({properties, save}) => {
               onChange={handleChange('محدوده دقت حسگر')}
               error={Boolean(errors['محدوده دقت حسگر']) || false} 
               helperText={errors['محدوده دقت حسگر'] || ''}
+              color='secondary'
             />
             <TextField  
               label='رزولوشن فیلم'
@@ -154,6 +157,7 @@ const CameraDetails = ({properties, save}) => {
               onChange={handleChange('رزولوشن فیلم')}
               error={Boolean(errors['رزولوشن فیلم']) || false} 
               helperText={errors['رزولوشن فیلم'] || ''}
+              color='secondary'
             />
             <TextField  
               label='محدوده زوم'
@@ -165,6 +169,7 @@ const CameraDetails = ({properties, save}) => {
               onChange={handleChange('محدوده زوم')}
               error={Boolean(errors['محدوده زوم']) || false} 
               helperText={errors['محدوده زوم'] || ''}
+              color='secondary'
             />
             <TextField  
               label='سایز صفحه نمایش'
@@ -176,6 +181,7 @@ const CameraDetails = ({properties, save}) => {
               onChange={handleChange('سایز صفحه نمایش')}
               error={Boolean(errors['سایز صفحه نمایش']) || false} 
               helperText={errors['سایز صفحه نمایش'] || ''}
+              color='secondary'
             />
 
             <FormControl component="fieldset" fullWidth={true}>
@@ -187,8 +193,8 @@ const CameraDetails = ({properties, save}) => {
             </FormControl>
 
             <FormControl component="fieldset" fullWidth={true}>
-              <FormLabel component="legend">خروجی HTMI</FormLabel>
-              <RadioGroup aria-label="gender" className={classes.formGroup} name="simNumber" value={data['خروجی HTMI'] || 'خیر'} onChange={handleChange('خروجی HTMI')}>
+              <FormLabel component="legend">خروجی HDMI</FormLabel>
+              <RadioGroup aria-label="gender" className={classes.formGroup} name="simNumber" value={data['خروجی HDMI'] || 'خیر'} onChange={handleChange('خروجی HDMI')}>
                 <FormControlLabel value='بله' control={<Radio />} label="بله" />
                 <FormControlLabel value='خیر' control={<Radio />} label="خیر" />
               </RadioGroup>
@@ -243,8 +249,8 @@ const CameraDetails = ({properties, save}) => {
             </FormControl>
 
             <FormControl component="fieldset" fullWidth={true}>
-              <FormLabel component="legend">تکنولوزی بی سیم</FormLabel>
-              <RadioGroup aria-label="gender" className={classes.formGroup} name="simNumber" value={data['تکنولوزی بی سیم'] || 'خیر'} onChange={handleChange('تکنولوزی بی سیم')}>
+              <FormLabel component="legend">تکنولوژی بی سیم</FormLabel>
+              <RadioGroup aria-label="gender" className={classes.formGroup} name="simNumber" value={data['تکنولوژی بی سیم'] || 'خیر'} onChange={handleChange('تکنولوژی بی سیم')}>
                 <FormControlLabel value='بله' control={<Radio />} label="بله" />
                 <FormControlLabel value='خیر' control={<Radio />} label="خیر" />
               </RadioGroup>
