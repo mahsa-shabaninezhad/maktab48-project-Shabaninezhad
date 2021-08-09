@@ -36,8 +36,8 @@ const PhoneDetails = ({properties, save}) => {
     'فناوری صفحه نمایش': '',
     'تعداد سیم کارت': 'تک',
     'اندازه':  '',
-    'دوربین های پشت گوشی': '',
-    'حافظه داخلی': '',
+    'دوربین های پشت گوشی': "4 ماژول دوربین",
+    'رزولوشن عکس': '12 مگاپیکسل',
     'حافظه داخلی': '128 گیگابایت',
     'مقدار RAM':  '4 گیگابایت',
     'شبکه ارتباطی': '4G'
@@ -63,18 +63,6 @@ const PhoneDetails = ({properties, save}) => {
         message: 'اندازه الزامی می باشد.'
       },
     },
-    'دوربین های پشت گوشی': {
-      required: {
-        value: true,
-        message: 'دوربین ها الزامی می باشند.'
-      },
-    },
-    'رزولوشن عکس': {
-      required: {
-        value: true,
-        message: 'رزولوشن عکس الزامی می باشد.'
-      },
-    }
   }
 
   const onSubmit = () => {
@@ -97,6 +85,7 @@ const PhoneDetails = ({properties, save}) => {
               margin='dense'
               value={data['سیستم عامل'] || 'android'}
               onChange={handleChange('سیستم عامل')}
+              color='secondary'
           >
             <MenuItem value='android'>
               android
@@ -105,6 +94,7 @@ const PhoneDetails = ({properties, save}) => {
               ios
             </MenuItem>
           </TextField>
+          
           <TextField  
             label="نسخه سیستم عامل" 
             variant="outlined" 
@@ -115,7 +105,9 @@ const PhoneDetails = ({properties, save}) => {
             onChange={handleChange('نسخه سیستم عامل')}
             error={Boolean(errors['نسخه سیستم عامل']) || false} 
             helperText={errors['نسخه سیستم عامل'] || ''}
+            color='secondary'
           />
+
           <TextField  
             label="فناوری صفحه نمایش"
             variant="outlined" 
@@ -126,6 +118,7 @@ const PhoneDetails = ({properties, save}) => {
             onChange={handleChange('فناوری صفحه نمایش')}
             error={Boolean(errors['فناوری صفحه نمایش']) || false} 
             helperText={errors['فناوری صفحه نمایش'] || ''}
+            color='secondary'
           />
           <TextField  
             label="اندازه"
@@ -137,29 +130,55 @@ const PhoneDetails = ({properties, save}) => {
             onChange={handleChange('اندازه')}
             error={Boolean(errors['اندازه']) || false} 
             helperText={errors['اندازه'] || ''}
+            color='secondary'
           />
-          <TextField  
-            label="دوربین های پشت گوشی"
-            variant="outlined" 
-            required
-            fullWidth={true}
-            margin='dense'
-            value={data['دوربین های پشت گوشی'] || ''}
-            onChange={handleChange('دوربین های پشت گوشی')}
-            error={Boolean(errors['دوربین های پشت گوشی']) || false} 
-            helperText={errors['دوربین های پشت گوشی'] || ''}
-          />
-          <TextField  
-            label="رزولوشن عکس"
-            variant="outlined" 
-            required
-            fullWidth={true}
-            margin='dense'
-            value={data['رزولوشن عکس'] || ''}
-            onChange={handleChange('رزولوشن عکس')}
-            error={Boolean(errors['رزولوشن عکس']) || false} 
-            helperText={errors['رزولوشن عکس'] || ''}
-          />
+        
+          <TextField
+              label="دوربین های پشت گوشی"
+              variant="outlined" 
+              select
+              fullWidth={true} 
+              margin='dense'
+              value={data['دوربین های پشت گوشی'] || "4 ماژول دوربین"}
+              onChange={handleChange('دوربین های پشت گوشی')}
+              color='secondary'
+          >
+            <MenuItem value="4 ماژول دوربین">
+              4 ماژول دوربین
+            </MenuItem>
+            <MenuItem value="3 ماژول دوربین">
+              3 ماژول دوربین
+            </MenuItem>
+            <MenuItem value="2 ماژول دوربین">
+              2 ماژول دوربین
+            </MenuItem>
+            <MenuItem value="1 ماژول دوربین">
+              1 ماژول دوربین
+            </MenuItem>
+          </TextField>
+          <TextField
+              label="رزولوشن عکس" 
+              variant="outlined" 
+              select
+              fullWidth={true} 
+              margin='dense'
+              value={data['رزولوشن عکس'] || '12 مگاپیکسل'}
+              onChange={handleChange('رزولوشن عکس')}
+              color='secondary'
+          >
+            <MenuItem value='12 مگاپیکسل'>
+              12 مگاپیکسل
+            </MenuItem>
+            <MenuItem value='16 مگاپیکسل'>
+              16 مگاپیکسل
+            </MenuItem>
+            <MenuItem value='48 مگاپیکسل'>
+              48 مگاپیکسل
+            </MenuItem>
+            <MenuItem value='64 مگاپیکسل'>
+              64 مگاپیکسل
+            </MenuItem>
+          </TextField>
           <FormControl component="fieldset" fullWidth={true}>
             <FormLabel component="legend">تعداد سیم کارت</FormLabel>
             <RadioGroup aria-label="gender" className={classes.formGroup} name="simNumber" value={data['تعداد سیم کارت'] || "تک"} onChange={handleChange('تعداد سیم کارت')}>
@@ -176,12 +195,13 @@ const PhoneDetails = ({properties, save}) => {
               <FormControlLabel value="128 گیگابایت" control={<Radio />} label="128 گیگابایت" />
               <FormControlLabel value="64 گیگابایت" control={<Radio />} label="64 گیگابایت" />
               <FormControlLabel value="32 گیگابایت" control={<Radio />} label="32 گیگابایت" />
+              <FormControlLabel value="16 گیگابایت" control={<Radio />} label="16 گیگابایت" />
               <FormControlLabel value="8 گیگابایت"control={<Radio />} label="8 گیگابایت" />
               <FormControlLabel value="4 گیگابایت" control={<Radio />} label="4 گیگابایت" />
             </RadioGroup>
           </FormControl>
           <FormControl component="fieldset" fullWidth={true}>
-            <FormLabel component="legend">حافظه Ram</FormLabel>
+            <FormLabel component="legend">حافظه RAM</FormLabel>
             <RadioGroup aria-label="gender" className={classes.formGroup} name="RAM" value={data['مقدار RAM'] || '4 گیگابایت'} onChange={handleChange('مقدار RAM')}>
               <FormControlLabel value="16 گیگابایت" control={<Radio />} label="16 گیگابایت" />
               <FormControlLabel value="12 گیگابایت" control={<Radio />} label="12 گیگابایت" />
