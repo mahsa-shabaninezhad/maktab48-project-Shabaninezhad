@@ -1,16 +1,19 @@
 import { Box, Button, makeStyles, Typography } from '@material-ui/core'
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import useAxios from '../../hooks/useAxios'
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import RouterLink from '../../components/RouterLink';
+import { useContext } from 'react';
+import { BasketContext } from '../../context/BasketContext/BasketContext';
+import Loading from '../../components/Loading';
 
 const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
         height: '100%',
         display: 'flex', 
-        minHeight: `calc(100vh - 82px)`,
+        minHeight: `calc(100vh - 70px)`,
         backgroundImage: `linear-gradient(to left, 
             ${theme.palette.primary.dark} 0%, 
             ${theme.palette.primary.dark} 75%, 
@@ -81,11 +84,14 @@ const useStyles = makeStyles(theme => ({
 const ProductPage = () => {
     const classes = useStyles()
     const {id}= useParams()
+    const history = useHistory()
     //for showing less properties at first
     const [seeMore, setSeeMore] = useState(true)
     
     //get product
     const {response, isLoading} = useAxios({url: `products/${id}`})
+
+    const {addToCart} = useContext(BasketContext)
 
     /*loop over properties in product object and make array of html element 
     because each category has different properties*/
@@ -94,22 +100,29 @@ const ProductPage = () => {
         properties.push(<p><strong dir='rtl'>{`${key}: `}</strong>{`${response.properties[key]}`}</p>)
     }
 
+    const handleOrder = () => {
+        //prevent to add if order more than inventory
+        //redirect to /cart when new item added
+        addToCart(response.id).then(
+            //res is true when order less than inventory and false when more than it
+            res => res && history.push('/cart')
+        )
+    }
+
     return (
         <>
         {isLoading?
-        <div style={{textAlign: 'center'}}>
-            ...Loading
-        </div>
+        <Loading isLoading={isLoading}/>
         :<Box className={classes.root}>
             <img src={response.image} className={classes.image}/>
             <Box flexGrow='1' p='3rem 2rem 0'>
                 <Typography variant='h1' className={classes.title}>{response.title}</Typography>
                 <Box display='flex' marginBottom='1rem'>
-                    <RouterLink to={`/products?category=${response.category}`}>
+                    <RouterLink to={`/products?category=${response.category}&_page=1&_limit=5`}>
                         {response.category}
                     </RouterLink> 
                     <ArrowLeftIcon/> 
-                    <RouterLink to={`/products?category=${response.category}&brand=${response.brand}`}>
+                    <RouterLink to={`/products?category=${response.category}&brand=${response.brand}&_page=1&_limit=5`}>
                         {response.brand}
                     </RouterLink>
                 </Box>
@@ -122,11 +135,18 @@ const ProductPage = () => {
                         <Button onClick={() => setSeeMore(!seeMore)}>{seeMore? 'مشاهده بیشتر': 'مشاهده کمتر'}</Button>
                     </Box>
                     <Box className={classes.addBox}>
-                        {response.inventory &&<Typography variant='h4' component='p' className={classes.price}>
-                            { (response.price)?.toLocaleString('ar-EG')}
+                        {Boolean(response.inventory) &&<Typography variant='h4' component='p' className={classes.price}>
+                            {(response.price)?.toLocaleString('ar-EG')}
                             <Typography component='subtitle1'>تومان</Typography>
                         </Typography>}
-                        <Button variant='contained' color='secondary' disabled={!response.inventory}>{response.inventory?'افزودن به سبد خرید' : 'ناموجود'}</Button>
+                        <Button 
+                            variant='contained' 
+                            color='secondary' 
+                            disabled={!response.inventory}
+                            onClick={handleOrder}
+                        >
+                            {response.inventory?'افزودن به سبد خرید' : 'ناموجود'}
+                        </Button>
                     </Box>
                 </Box>
             </Box>
