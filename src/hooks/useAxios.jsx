@@ -5,13 +5,14 @@ const useAxios = (config, resFunc, rejFunc) => {
     const [response, setResponse] = useState(null);
     const [errors, setErrors] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
+    const [headers, setHeaders] = useState(null)
     useEffect(() => {
-        console.log('running');
         
         setIsLoading(true)
         doApiCall()
         .then(res => {
             setResponse(res.data)
+            setHeaders(res.headers)
             setIsLoading(false)
             if(resFunc){
                 resFunc()
@@ -37,7 +38,7 @@ const useAxios = (config, resFunc, rejFunc) => {
         return res
     } 
 
-    return {response, errors, isLoading}
+    return {response, errors, isLoading, headers}
 }
 
 export default useAxios
