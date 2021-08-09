@@ -102,7 +102,7 @@ const Sidebar = ({toggleSidebar}) => {
                       product.brands.map(brand => (<List key={brand} component="div" disablePadding>
                           <ListItem 
                             component={RouterLink} 
-                            to={`/products?category=${open}&brand=${brand}`} 
+                            to={`/products?category=${open}&brand=${brand}&_page=1&_limit=5`} 
                             className={clsx(classes.nested, {
                               [classes.active]:  brand === query.get('brand')
                             })}

@@ -113,7 +113,7 @@ const Carousel = ({products, ...props}) => {
                     />
                 )}
             </Box>
-            <Button component={RouterLink} to={`/products?category=${props.category}`} variant='contained' color={props.category==='لپ تاپ'? 'primary' : 'secondary'} style={{margin: '1rem auto', textAlign: 'center'}}>همه محصولات</Button>
+            <Button component={RouterLink} to={`/products?category=${props.category}&_page=1&_limit=3`} variant='contained' color={props.category==='لپ تاپ'? 'primary' : 'secondary'} style={{margin: '1rem auto', textAlign: 'center'}}>همه محصولات</Button>
         </div>
     )
 }
