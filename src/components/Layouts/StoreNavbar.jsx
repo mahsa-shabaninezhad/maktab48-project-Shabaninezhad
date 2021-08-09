@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Link, IconButton} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -7,6 +7,7 @@ import { Link as RouterLink, NavLink, useLocation } from "react-router-dom";
 import logo from '../../assets/images/bestoreLogo.png'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Badge from '@material-ui/core/Badge';
+import { BasketContext } from '../../context/BasketContext/BasketContext';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -74,6 +75,7 @@ export default function StoreNavbar({toggleSidebar}) {
   const tablet = useMediaQuery('(max-width: 768px)')
   const phone = useMediaQuery('(max-width: 400px)')
   const {pathname} = useLocation()
+  const {state} = useContext(BasketContext)
 
   return (
     <div className={classes.root}>
@@ -91,8 +93,8 @@ export default function StoreNavbar({toggleSidebar}) {
           <Link color='inherit' className={classes.link} activeClassName={classes.active} component={NavLink} to='/adminPanel/products'>
             مدیریت
           </Link>
-          <IconButton color="secondary" variant='contained' component={RouterLink} to='/card'>
-            <Badge badgeContent={0} color='error'>
+          <IconButton color="secondary" variant='contained' component={RouterLink} to='/cart'>
+            <Badge badgeContent={state.numberOfProducts} color='error'>
               <ShoppingCartIcon/>
             </Badge>
           </IconButton>
