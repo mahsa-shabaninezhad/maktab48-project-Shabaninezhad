@@ -7,17 +7,23 @@ import { BrowserRouter as Router } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './store/configureStore';
+import { BasketProvider } from './context/BasketContext/BasketContext.jsx';
+import { PaymentProvider } from './context/paymentContext/PaymentContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router>
-        <Theme>
-          <RTL>
-            <App />
-          </RTL>
-        </Theme>
-      </Router>
+      <PaymentProvider>
+        <BasketProvider>
+          <Router>
+            <Theme>
+              <RTL>
+                <App />
+              </RTL>
+            </Theme>
+          </Router>
+        </BasketProvider>
+      </PaymentProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
