@@ -10,7 +10,6 @@ const productAxios = axios.create({
 
 productAxios.interceptors.response.use(function (response) {
     if(response.status === 200 || response.status === 201){
-        console.log(response.data);
         switch (response.config.method) {
             case 'post':
                 toast.success(`${response.data.title} با موفقیت اضافه شد.`)
@@ -25,7 +24,6 @@ productAxios.interceptors.response.use(function (response) {
                 break;
         }
     }
-    // console.log(response);
     return response
     
 }, function (error) {
