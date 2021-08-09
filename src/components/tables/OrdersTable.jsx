@@ -52,7 +52,6 @@ const OrdersTable = (props) => {
   const dispatch = useDispatch()
   //geting state from redux
   const orders = useSelector(state => state.orders.ordersList)
-
   //----------------------------------------------------------------------
   //-------------------------PAGINATION-----------------------------------
   //----------------------------------------------------------------------
@@ -71,8 +70,8 @@ const OrdersTable = (props) => {
     setPage(0);
   };
 
-  const totalPrice = (card) => {
-    const total = card.map(order => order.price).reduce((sum, price) => sum + price)
+  const totalPrice = (cart) => {
+    const total = cart.map(order => order.price*order.number)?.reduce((sum, price) => sum + price,0)
     return total.toLocaleString()
   }
   
@@ -92,8 +91,8 @@ const OrdersTable = (props) => {
                   ?orders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) 
                   :orders
                   ).map((order) => <StyledTableRow className={classes.table__row} key={order.id}>
-                    <TableCell>{order.name}</TableCell>
-                    <TableCell >{totalPrice(order.card)}</TableCell>
+                    <TableCell>{`${order.firstName} ${order.lastName}`}</TableCell>
+                    <TableCell >{totalPrice(order.cart)}</TableCell>
                     <TableCell >
                       {order.orderTime}
                     </TableCell>

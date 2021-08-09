@@ -38,13 +38,13 @@ const OrdersModal = ({data}) => {
     return (
         <div className={classes.root}>
             <ul className={classes.ul}>
-                <li>نام مشتری: {data.name}</li>
+                <li>نام مشتری: {`${data.firstName} ${data.lastName}`}</li>
                 <li>آدرس: {data.address}</li>
                 <li>تلفن: {data.phone}</li>
                 <li>زمان تحویل: {data.deliveryTime}</li>
                 <li>زمان سفارش: {data.orderTime}</li>
             </ul>
-            <Table orders={data.card}/>
+            <Table orders={data.cart}/>
             {data.deliveryStatus === 'delivered' ? <p>زمان تحویل: {data.deliveryTime}</p> : <Button variant='contained' color='secondary' onClick={() => dispatch(changeDeliveryStatus(data.id, {...data, deliveryStatus: "delivered"}))}>تحویل شد</Button>}
         </div>
     )
