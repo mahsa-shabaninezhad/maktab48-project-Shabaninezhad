@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import { Table, TableBody, TableCell, TableContainer, TableHead, 
-TableRow, TableFooter, Paper, TablePagination,Avatar} from '@material-ui/core';
+TableRow, TableFooter, Paper, TablePagination} from '@material-ui/core';
 import Pagination from './Pagination';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Icon from './Icon';
 import { useDispatch } from 'react-redux';
-import { selectProductToDelete, startEditAProduct, toggleFavorite } from '../store/actions/productAtions';
+import { selectProductToDelete, toggleFavorite } from '../store/actions/productAtions';
 import { openModal } from '../store/actions/modalActions';
 import AddOrEditProductModal from './modals/AddOrEditProductModal';
 import DeleteModal from './modals/DeleteModal';
@@ -56,12 +56,12 @@ const ProductsTable = ({data, headers}) => {
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
   const handleChangePage = (event, newPage) => {
-      setPage(newPage);
+    setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
-      setRowsPerPage(parseInt(event.target.value, 10));
-      setPage(0);
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
   };
 
   const handleDeleteAProduct = (product) => {

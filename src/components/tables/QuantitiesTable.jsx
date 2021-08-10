@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import { Table, TableBody, TableCell, TableContainer, TableHead, InputBase,
 TableRow, TableFooter, Paper, TablePagination, Typography} from '@material-ui/core';
@@ -112,7 +112,7 @@ const QuantitiesTable = (props) => {
   
   return (
     <Paper className={classes.root} elevation={2}>
-        {buffer && <TableContainer>
+        {<TableContainer>
             <Table  aria-label="sticky table" className={classes.table}>
               <TableHead>
                 <TableRow>
@@ -122,7 +122,7 @@ const QuantitiesTable = (props) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {(rowsPerPage > 0
+                {buffer && (rowsPerPage > 0 
                   ?products.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) 
                   :products
                   ).map((product) => {
