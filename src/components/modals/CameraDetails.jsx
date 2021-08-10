@@ -38,9 +38,9 @@ const CameraDetails = ({properties, save}) => {
     }:{
         'نوع': 'DSLR',
         'قطع حسگر': 'Full Frame',
-        'محدوده دقت حسگر': '',
-        'محدوده زوم': '',
-        'رزولوشن فیلم': '',
+        'محدوده دقت حسگر': '20.0 مگاپیکسل و بیشتر',
+        'محدوده زوم': 'تا 3 برابر بزرگنمایی',
+        'رزولوشن فیلم': '4K',
         'سایز صفحه نمایش': '',
         'قابلیت هوشمند': 'خیر',
         'خروجی HDMI': 'خیر',
@@ -56,24 +56,24 @@ const CameraDetails = ({properties, save}) => {
     
     //form validations
     const validations = {
-        'محدوده دقت حسگر': {
-            required:{
-                value: true,
-                message: 'محدوده دقت حسگر الزامی است.'
-            }
-        },
-        'محدوده زوم': {
-            required: {
-              value: true,
-              message: 'محدوده زوم الزامی می باشد.'
-            },
-        },
-        'رزولوشن فیلم': {
-            required: {
-              value: true,
-              message: 'رزولوشن فیلم الزامی می باشد.'
-            },
-        },
+        // 'محدوده دقت حسگر': {
+        //     required:{
+        //         value: true,
+        //         message: 'محدوده دقت حسگر الزامی است.'
+        //     }
+        // },
+        // 'محدوده زوم': {
+        //     required: {
+        //       value: true,
+        //       message: 'محدوده زوم الزامی می باشد.'
+        //     },
+        // },
+        // 'رزولوشن فیلم': {
+        //     required: {
+        //       value: true,
+        //       message: 'رزولوشن فیلم الزامی می باشد.'
+        //     },
+        // },
         'سایز صفحه نمایش': {
             required: {
               value: true,
@@ -135,19 +135,78 @@ const CameraDetails = ({properties, save}) => {
               </MenuItem>
             </TextField>
 
-            <TextField  
-              label="محدوده دقت حسگر" 
-              variant="outlined" 
-              required
-              fullWidth={true}
-              margin='dense'
-              value={data['محدوده دقت حسگر'] || ''}
-              onChange={handleChange('محدوده دقت حسگر')}
-              error={Boolean(errors['محدوده دقت حسگر']) || false} 
-              helperText={errors['محدوده دقت حسگر'] || ''}
-              color='secondary'
-            />
-            <TextField  
+            <TextField
+                label="محدوده دقت حسگر" 
+                variant="outlined" 
+                select
+                fullWidth={true} 
+                margin='dense'
+                value={data['محدوده دقت حسگر'] || '20.0 مگاپیکسل و بیشتر'}
+                onChange={handleChange('محدوده دقت حسگر')}
+                color='secondary'
+            >
+              <MenuItem value='10.0 مگاپیکسل'>
+                10.0 مگاپیکسل
+              </MenuItem>
+              <MenuItem value='10.0 تا 12.0 مگاپیکسل'>
+                10.0 تا 12.0 مگاپیکسل
+              </MenuItem>
+              <MenuItem value='12.0 تا 15.0 مگاپیکسل'>
+                12.0 تا 15.0 مگاپیکسل
+              </MenuItem>
+              <MenuItem value='15.0 تا 20.0 مگاپیکسل'>
+                15.0 تا 20.0 مگاپیکسل
+              </MenuItem>
+              <MenuItem value='20.0 مگاپیکسل'>
+                20.0 مگاپیکسل
+              </MenuItem>
+              <MenuItem value='20.0 مگاپیکسل و بیشتر'>
+                20.0 مگاپیکسل و بیشتر
+              </MenuItem>
+              <MenuItem value='21.14 مگاپیکسل'>
+                21.14 مگاپیکسل
+              </MenuItem>
+            </TextField>
+
+            <TextField
+                label="محدوده زوم" 
+                variant="outlined" 
+                select
+                fullWidth={true} 
+                margin='dense'
+                value={data['محدوده زوم'] || 'تا 3 برابر بزرگنمایی'}
+                onChange={handleChange('محدوده زوم')}
+                color='secondary'
+            >
+              <MenuItem value='تا 3 برابر بزرگنمایی'>
+                تا 3 برابر بزرگنمایی
+              </MenuItem>
+              <MenuItem value='3 تا 6 برابر بزرگنمایی'>
+                3 تا 6 برابر بزرگنمایی
+              </MenuItem>
+              <MenuItem value='6 تا 10 برابر بزرگنمایی'>
+                6 تا 10 برابر بزرگنمایی
+              </MenuItem>
+              <MenuItem value='10 تا 15 برابر بزرگنمایی'>
+                10 تا 15 برابر بزرگنمایی
+              </MenuItem>
+              <MenuItem value='20 تا 30 برابر بزرگنمایی'>
+                20 تا 30 برابر بزرگنمایی
+              </MenuItem>
+              <MenuItem value='30 برابر بزرگنمایی'>
+                30 برابر بزرگنمایی
+              </MenuItem>
+              <MenuItem value='50 برابر بزرگنمایی و بیشتر'>
+                50 برابر بزرگنمایی و بیشتر
+              </MenuItem>
+              <MenuItem value='3 برابر بزرگنمایی اپتیکال'>
+                3 برابر بزرگنمایی اپتیکال
+              </MenuItem>
+              <MenuItem value='4 برابر بزرگنمایی اپتیکال'>
+                4 برابر بزرگنمایی اپتیکال
+              </MenuItem>
+            </TextField>
+            {/* <TextField  
               label='رزولوشن فیلم'
               variant="outlined" 
               required
@@ -158,19 +217,31 @@ const CameraDetails = ({properties, save}) => {
               error={Boolean(errors['رزولوشن فیلم']) || false} 
               helperText={errors['رزولوشن فیلم'] || ''}
               color='secondary'
-            />
-            <TextField  
-              label='محدوده زوم'
-              variant="outlined" 
-              required
-              fullWidth={true}
-              margin='dense'
-              value={data['محدوده زوم'] || ''}
-              onChange={handleChange('محدوده زوم')}
-              error={Boolean(errors['محدوده زوم']) || false} 
-              helperText={errors['محدوده زوم'] || ''}
-              color='secondary'
-            />
+            /> */}
+            <TextField
+                label="رزولوشن فیلم" 
+                variant="outlined" 
+                select
+                fullWidth={true} 
+                margin='dense'
+                value={data['رزولوشن فیلم'] || '4K'}
+                onChange={handleChange('رزولوشن فیلم')}
+                color='secondary'
+            >
+              <MenuItem value='4K'>
+                4K
+              </MenuItem>
+              <MenuItem value='Full HD'>
+                Full HD
+              </MenuItem>
+              <MenuItem value='HD'>
+                HD
+              </MenuItem>
+              <MenuItem value='فاقد قابلیت فیلمبرداری'>
+                فاقد قابلیت فیلمبرداری
+              </MenuItem>
+            </TextField>
+            
             <TextField  
               label='سایز صفحه نمایش'
               variant="outlined" 
