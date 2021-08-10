@@ -55,7 +55,7 @@ const ProductsPage = () => {
     const {pathname, search} = useLocation()
     const [filter, setFilter] = useState({...turnUrlToFilter()})
     const [url, setUrl] = useState(turnFilterToUrl().slice(1,-1))
-    const {response, isLoading, headers} = useAxios({url})
+    const {response, errors, isLoading, headers} = useAxios({url})
     
     
     useEffect(() => {
@@ -71,9 +71,10 @@ const ProductsPage = () => {
           <div className={classes.filterBox}>
             <Filter category={query.get('category')} />
           </div>
-          {!isLoading? 
-          <>
-            <CustomGrid 
+          {isLoading? 
+          <Loading isLoading={isLoading}/>
+          :<>
+            {!errors && <CustomGrid 
               cellWidth="250px" 
               rowGap='4rem'
             >
@@ -83,10 +84,9 @@ const ProductsPage = () => {
                 :<p>موردی یافت نشد</p>
               }
 
-            </CustomGrid>
-            <Pagination paginateInfo={parseLinkHeader(headers?.link)}/>
+            </CustomGrid>}
+            {!errors && <Pagination paginateInfo={parseLinkHeader(headers?.link)}/>}
           </>
-          :<Loading isLoading={isLoading}/>
           }
         </div>
         </>

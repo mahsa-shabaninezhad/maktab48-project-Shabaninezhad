@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 const useAxios = (config, resFunc, rejFunc) => {
     const [response, setResponse] = useState(null);
@@ -20,6 +21,11 @@ const useAxios = (config, resFunc, rejFunc) => {
         }).catch(err => {
             setErrors(err)
             setIsLoading(false)
+            if(err.response?.status === 404){
+                toast.error('موردی یافت نشد')
+            }else{
+                toast.error('اتصال اینترنت خود را چک کنید.')
+            }
             if(rejFunc){
                 rejFunc()
             }

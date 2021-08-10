@@ -87,9 +87,13 @@ const ProductPage = () => {
     const history = useHistory()
     //for showing less properties at first
     const [seeMore, setSeeMore] = useState(true)
+
+    const notFound = () => {
+        history.push('/')
+    }
     
     //get product
-    const {response, isLoading} = useAxios({url: `products/${id}`})
+    const {response, errors, isLoading} = useAxios({url: `products/${id}`}, null, notFound)
 
     const {addToCart} = useContext(BasketContext)
 
@@ -109,52 +113,58 @@ const ProductPage = () => {
         )
     }
 
-    return (
-        <>
-        {isLoading?
-        <Loading isLoading={isLoading}/>
-        :<Box className={classes.root}>
-            <img src={response.image} className={classes.image}/>
-            <Box flexGrow='1' p='3rem 2rem 0'>
-                <Typography variant='h1' className={classes.title}>{response.title}</Typography>
-                <Box display='flex' marginBottom='1rem'>
-                    <RouterLink to={`/products?category=${response.category}&_page=1&_limit=5`}>
-                        {response.category}
-                    </RouterLink> 
-                    <ArrowLeftIcon/> 
-                    <RouterLink to={`/products?category=${response.category}&brand=${response.brand}&_page=1&_limit=5`}>
-                        {response.brand}
-                    </RouterLink>
-                </Box>
-                <Box className={classes.content}>
-                    <Box>
-                        <Typography variant='h3'>ویژگی های کالا:</Typography>
-                        <Box overflow='hidden' height={seeMore? '320px' : 'min-content' }>
-                            {properties}
-                        </Box>
-                        <Button onClick={() => setSeeMore(!seeMore)}>{seeMore? 'مشاهده بیشتر': 'مشاهده کمتر'}</Button>
+    if (errors) {
+        return null
+    }else{
+
+        return (
+            <>
+            {isLoading?
+            <Loading isLoading={isLoading}/>
+            :<Box className={classes.root}>
+                <img src={response.image} className={classes.image}/>
+                <Box flexGrow='1' p='3rem 2rem 0'>
+                    <Typography variant='h1' className={classes.title}>{response.title}</Typography>
+                    <Box display='flex' marginBottom='1rem'>
+                        <RouterLink to={`/products?category=${response.category}&_page=1&_limit=5`}>
+                            {response.category}
+                        </RouterLink> 
+                        <ArrowLeftIcon/> 
+                        <RouterLink to={`/products?category=${response.category}&brand=${response.brand}&_page=1&_limit=5`}>
+                            {response.brand}
+                        </RouterLink>
                     </Box>
-                    <Box className={classes.addBox}>
-                        {Boolean(response.inventory) &&<Typography variant='h4' component='p' className={classes.price}>
-                            {(response.price)?.toLocaleString('ar-EG')}
-                            <Typography component='subtitle1'>تومان</Typography>
-                        </Typography>}
-                        <Button 
-                            variant='contained' 
-                            color='secondary' 
-                            disabled={!response.inventory}
-                            onClick={handleOrder}
-                        >
-                            {response.inventory?'افزودن به سبد خرید' : 'ناموجود'}
-                        </Button>
+                    <Box className={classes.content}>
+                        <Box>
+                            <Typography variant='h3'>ویژگی های کالا:</Typography>
+                            <Box overflow='hidden' height={seeMore? '320px' : 'min-content' }>
+                                {properties}
+                            </Box>
+                            <Button onClick={() => setSeeMore(!seeMore)}>{seeMore? 'مشاهده بیشتر': 'مشاهده کمتر'}</Button>
+                        </Box>
+                        <Box className={classes.addBox}>
+                            {Boolean(response.inventory) &&<Typography variant='h4' component='p' className={classes.price}>
+                                {(response.price)?.toLocaleString('ar-EG')}
+                                <Typography component='subtitle1'>تومان</Typography>
+                            </Typography>}
+                            <Button 
+                                variant='contained' 
+                                color='secondary' 
+                                disabled={!response.inventory}
+                                onClick={handleOrder}
+                            >
+                                {response.inventory?'افزودن به سبد خرید' : 'ناموجود'}
+                            </Button>
+                        </Box>
                     </Box>
                 </Box>
             </Box>
-        </Box>
-        }
+            }
+    
+            </>
+        )
+    }
+    }
 
-        </>
-    )
-}
 
 export default ProductPage
