@@ -1,5 +1,6 @@
 import productAxios from "../../api/productAxios";
 import { ActionTypes } from "../constants/action-types";
+import { finishLoading, startLoading } from "./loadingActions";
 import { closeModal } from "./modalActions";
 
 export const setProducts = (products) => {
@@ -22,19 +23,6 @@ export const addAProductToState = (data) => {
         payload: data
     })
 }
-
-// export const startEditAProduct = (data) => {
-//     return({
-//         type: ActionTypes.START_EDITING_A_PRODUCT,
-//         payload: data
-//     })
-// }
-
-// export const finishEditAProduct = () => {
-//     return({
-//         type: ActionTypes.FINISH_EDITING_A_PRODUCT,
-//     })
-// }
 
 export const deleteAProductFromState = (id) => {
     return({
@@ -99,9 +87,16 @@ export const cancelEditACell = (id, prevCell) => {
 
 //-------------------------ASYNC ACTIONS---------------------------
 export const getAllProducts = () => async (dispatch, getState) => {
-    const response = await productAxios.get().catch(err => dispatch({type: ActionTypes.FINISH_LOADING}))
-    if(response)dispatch({type: ActionTypes.FINISH_LOADING})
-    dispatch(setProducts(response.data))
+    try{
+        dispatch(startLoading())
+        const response = await productAxios.get()
+        dispatch(finishLoading())
+        dispatch(setProducts(response.data))
+
+    }catch(err) {
+        dispatch(finishLoading())
+    }
+
 }
 
 export const addAProduct = (data) => async (dispatch, getState) => {

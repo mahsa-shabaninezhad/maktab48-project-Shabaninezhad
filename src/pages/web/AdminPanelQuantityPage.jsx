@@ -6,6 +6,8 @@ import { Prompt } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Button} from '@material-ui/core';
 import productAxios from '../../api/productAxios';
+import Loading from '../../components/Loading'
+
 
 const useStyle = makeStyles(theme => ({
   root: {
@@ -33,6 +35,9 @@ const AdminPanelQuantityPage = () => {
 
   //getting necessary state from redux
   const {productsList: products, editCellsList, editCellsListBuffer: buffer} = useSelector(state => state.products)
+  
+  const isLoading = useSelector(state => state.loading.isLoading)
+
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -91,9 +96,13 @@ const AdminPanelQuantityPage = () => {
                 مدیریت موجودی و قیمت ها
             </Typography>
             <Button variant='contained' color='primary' disabled={!editCellsList.length} onClick={handleSave}>ذخیره</Button>
-            <div className={classes.table}>
-              <Table />
-            </div>
+            {
+              isLoading?
+              <Loading isLoading={isLoading} />
+              :<div className={classes.table}>
+                <Table />
+              </div>
+            }
         </div>
     )
 }

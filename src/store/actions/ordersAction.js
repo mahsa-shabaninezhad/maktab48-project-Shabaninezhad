@@ -1,6 +1,6 @@
-import axios from "axios"
 import ordersAxios from "../../api/ordersAxios"
 import { ActionTypes } from "../constants/action-types"
+import { finishLoading, startLoading } from "./loadingActions"
 import { closeModal } from "./modalActions"
 
 export const setOrders = orders => {
@@ -19,9 +19,16 @@ export const setOrdersStatus = status => {
 }
 
 export const getOrders = () => async(dispatch, getState) => {
-    const filter = getState().orders.ordersStatus
-    const response = await ordersAxios.get(`?deliveryStatus=${filter}`)
-    dispatch(setOrders(response.data))
+    try{
+        dispatch(startLoading())
+        const filter = getState().orders.ordersStatus
+        const response = await ordersAxios.get(`?deliveryStatus=${filter}`)
+        dispatch(setOrders(response.data))
+        dispatch(finishLoading())
+
+    }catch(err) {
+        dispatch(finishLoading())
+    }
 }
 
 export const changeDeliveryStatus = (id, data) => (dispatch, getState) => {

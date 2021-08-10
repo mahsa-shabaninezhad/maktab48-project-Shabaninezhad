@@ -3,6 +3,8 @@ import { FormControl, FormControlLabel, FormLabel, makeStyles, Radio, RadioGroup
 import Table from '../../components/tables/OrdersTable'
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrders, setOrdersStatus } from '../../store/actions/ordersAction';
+import Loading from '../../components/Loading'
+
 
 const useStyle = makeStyles(theme => ({
   root: {
@@ -25,40 +27,43 @@ const useStyle = makeStyles(theme => ({
 }))
 
 const AdminPanelOrdersPage = () => {
-    const classes = useStyle()
+  const classes = useStyle()
+  const dispatch = useDispatch()
+  const ordersStatus = useSelector(state => state.orders.ordersStatus)
+  const isLoading = useSelector(state => state.loading.isLoading)
 
-    // const [value, setValue] = useState('delivered')
-    const dispatch = useDispatch()
-    const ordersStatus = useSelector(state => state.orders.ordersStatus)
   console.log(ordersStatus);
-    useEffect(() => {
-      dispatch(getOrders())
-    }, [ordersStatus])
+  useEffect(() => {
+    dispatch(getOrders())
+  }, [ordersStatus])
 
-    return (
-        <div className={classes.root}>
-            <Typography variant="h4" component='h2'>
-              مدیریت سفارش ها
-            </Typography>
-            <FormControl component="fieldset" >
-                <RadioGroup 
-                    aria-label="gender" 
-                    name="gender1" 
-                    className={classes.form}
-                    value={ordersStatus} 
-                    onChange={e => dispatch(setOrdersStatus(e.target.value))}
-                >
-                  <FormControlLabel value="delivered" control={<Radio />} label="سفارش های ارسال شده" />
-                  <FormControlLabel value="waiting" control={<Radio />} label="سفارش های در انتظار ارسال " />
-                </RadioGroup>
-            </FormControl>
-
-            <div className={classes.table}>
+  return (
+      <div className={classes.root}>
+          <Typography variant="h4" component='h2'>
+            مدیریت سفارش ها
+          </Typography>
+          <FormControl component="fieldset" >
+              <RadioGroup 
+                  aria-label="gender" 
+                  name="gender1" 
+                  className={classes.form}
+                  value={ordersStatus} 
+                  onChange={e => dispatch(setOrdersStatus(e.target.value))}
+              >
+                <FormControlLabel value="delivered" control={<Radio />} label="سفارش های ارسال شده" />
+                <FormControlLabel value="waiting" control={<Radio />} label="سفارش های در انتظار ارسال " />
+              </RadioGroup>
+          </FormControl>
+          {
+            isLoading?
+            <Loading isLoading={isLoading} />
+            :<div className={classes.table}>
               <Table />
             </div>
-      
-        </div>
-    )
+          }
+    
+      </div>
+  )
 }
 
 export default AdminPanelOrdersPage

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllProducts } from '../../store/actions/productAtions';
 import { openModal } from '../../store/actions/modalActions';
 import AddOrEditProductModal from '../../components/modals/AddOrEditProductModal';
+import Loading from '../../components/Loading'
 
 const useStyle = makeStyles(theme => ({
   root: {
@@ -30,6 +31,8 @@ const AdminPanelProductPage = (props) => {
   const dispatch = useDispatch()
   const products = useSelector(state => state.products.productsList)
 
+  const isLoading = useSelector(state => state.loading.isLoading)
+
   useEffect(() => {
     dispatch(getAllProducts())
     
@@ -42,12 +45,16 @@ const AdminPanelProductPage = (props) => {
         مدیریت کالاها
       </Typography>
       <Button variant='contained' color='primary' onClick={() => dispatch(openModal(<AddOrEditProductModal/>,'افزودن/ویرایش کالا'))}>افزودن کالا</Button>
-      <div className={classes.table}>
-        <Table 
-          data={products} 
-          headers={["تصویر", "نام کالا", "دسته بندی", " "]} 
-        />
-      </div>
+      {
+        isLoading?
+        <Loading isLoading={isLoading}/>
+        :<div className={classes.table}>
+          <Table 
+            data={products} 
+            headers={["تصویر", "نام کالا", "دسته بندی", " "]} 
+          />
+        </div>
+      }
       
     </div>
   )
