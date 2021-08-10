@@ -28,10 +28,10 @@ productAxios.interceptors.response.use(function (response) {
     
 }, function (error) {
     if (error.response) {
-        console.log(error.response.data.error);
         toast.error('مشکلی پیش آمده، لطفا دوباره تلاش کنید.')
     }
-
+    toast.error('اتصال با سرور برقرار نشد. لطفا اتصال اینترنت خود را چک کنید.')
+    
     return Promise.reject(error)
 })
 

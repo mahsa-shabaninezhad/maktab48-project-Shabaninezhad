@@ -23,7 +23,8 @@ ordersAxios.interceptors.response.use(function (response) {
     if (error.response) {
         toast.error(error.response.data.error)
     }
-
+    
+    toast.error('اتصال با سرور برقرار نشد. لطفا اتصال اینترنت خود را چک کنید.')
     return Promise.reject(error)
 })
 
