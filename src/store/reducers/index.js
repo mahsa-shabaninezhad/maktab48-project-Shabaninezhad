@@ -10,5 +10,5 @@ export const rootReducer = combineReducers({
     products: productsReducer,
     modal: modalReducer,
     orders: ordersReducer,
-    
+    loading: loadingReducer
 })
