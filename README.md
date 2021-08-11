@@ -8,6 +8,8 @@ For state management I used Redux and React Context and for API call I used Axio
 
 This is a SPA project so I used React-Router for faking navigation between pages.
 
+This project use json-server as fake server and use base64 for sending image to server.
+
 It contain 2 part: Admin panel and Store itself.
 
 For entering in admin part:
@@ -78,7 +80,8 @@ In this page admin can add, edit or delete a product and he can choose his favor
 
 ### Quantities Management Page
 
-In this page admin can add or modify price and inventory for each product.
+In this page admin can add or modify price and inventory, by double clicking on them, for each product .
+(by double clicking on price or inventory it replace with an input.)
 he can do it for several products simultaneously.
 
 <p>&nbsp;</p>
