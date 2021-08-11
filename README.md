@@ -1,10 +1,46 @@
-# Getting Started with Create React App
+# Bestore Ecommerce Web App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is an online shop with three category: laptop, mobile and camera.
+
+I used material-UI for styling and react-toastify for showing notifications to user, also I used react-transition-group for making carousel in landing page.
+
+For state management I used Redux and React Context and for API call I used Axios
+
+This is a SPA project so I used React-Router for faking navigation between pages.
+
+It contain 2 part: Admin panel and Store itself.
+
+For entering in admin part:
+
+Username: eve.holt@reqres.in
+
+Password: cityslicka
+
+## Table of contents
+
+- [Available Scripts](#available-scripts)
+- [Login Page](#login-page)
+- [Admin Panel](#admin-panel)
+  * [Products Management Page](#products-management-page)
+  * [Quantities Management Page](#quantities-management-page)
+  * [Orders Management Page](#orders-management-page)
+- [Store](#store)
+  * [Landing Page](#landing-page)
+  * [Products Page](#products-page)
+  * [Product Page](#product-page)
+  * [Basket Page](#basket-page)
+  * [Checkout Page](#checkout-page)
+  * [Payment Page](#payment-page)
+
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm run server`
+
+Please ensure that you run the server at first otherwise the project won't work properly. this project use json-server to fake the server functionality.
+
 
 ### `npm start`
 
@@ -14,57 +50,89 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Login page
 
-### `npm run build`
+Admin panel routes are protected and need login to the site before use.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+I used [fake api](https://reqres.in/) for handling user login and save the result of api (token) on local storage and access to it with help of Redux.(this api just check if the Username is correct and don't check the password.)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+For form validation I used a custom hook.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<p>&nbsp;</p>
 
-### `npm run eject`
+---
+<p>&nbsp;</p>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Admin Panel
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+In this part I used Redux for state management and do each API call with help of Redux thunk. also for API call I used Axios instances, and I used interceptores for showing notifications to user.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<p>&nbsp;</p>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Products Management Page
 
-## Learn More
+In this page admin can add, edit or delete a product and he can choose his favorite products for showing them in the store's landing page. (actully 6 last favorite products in each category will be showing in carousel)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<p>&nbsp;</p>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Quantities Management Page
 
-### Code Splitting
+In this page admin can add or modify price and inventory for each product.
+he can do it for several products simultaneously.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<p>&nbsp;</p>
 
-### Analyzing the Bundle Size
+### Orders Management Page
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+In this page admin can check customers orders.
 
-### Making a Progressive Web App
+<p>&nbsp;</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
+<p>&nbsp;</p>
 
-### Advanced Configuration
+## Store
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+In this part I used React Context instead of Redux.
+I used a custome hook for handling API calls.
 
-### Deployment
+<p>&nbsp;</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Landing Page
 
-### `npm run build` fails to minify
+In this page by clicking on each right side photo you can change the content of carousel to that category and also navigate to each category page by cliking on button and see all the products.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<p>&nbsp;</p>
+
+### Products Page
+
+In this page you see all the products of each category and can filter them by the field on the top of the page.
+
+<p>&nbsp;</p>
+
+### Product Page
+
+In this page you see properties of each product and can add it to your cart.
+
+<p>&nbsp;</p>
+
+### Basket Page
+
+In this page you see all the things that ordered and you can increase or decrease their amounts or remove them from your cart.
+
+for implementing basket I created a context and store the data in local storage so data won't lose with refreshing the page and can share across the app.
+
+<p>&nbsp;</p>
+
+### Checkout Page
+
+after you finalized your purchase you will redirect to this page and you must fill the form and then you will redirect to payment page. 
+
+
+<p>&nbsp;</p>
+
+### Payment Page
+
+This page is for faking payment action and it is just a photo but when you click on each button you will redirect to a new page and see the fake payment result.
+
