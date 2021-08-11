@@ -71,7 +71,6 @@ const AdminPanelQuantityPage = () => {
     products.forEach(product => {
         if( buffer[product.id]['isPriceEditable'] || buffer[product.id]['isInventoryEditable']){
             const {price, inventory} = buffer[product.id]
-            console.log(price);
             changes.push({...product, price: Number(price), inventory: Number(inventory)})
         }
     })
@@ -80,7 +79,6 @@ const AdminPanelQuantityPage = () => {
     Promise.all(changes.map(product => productAxios.put(`/${product.id}`, product)
     .catch(err => null)
     )).then(res => {
-      console.log(res)
       dispatch(getAllProducts())
       dispatch(emptyEditList())
     })

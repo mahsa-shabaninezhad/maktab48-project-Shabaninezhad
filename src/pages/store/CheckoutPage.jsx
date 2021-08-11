@@ -90,7 +90,6 @@ const CheckoutPage = () => {
     }
 
     const addBasketInformationToPayInfo = () => {
-        console.log(' state from basket info: ', state);
         return state.items.map(item =>{ 
             return({
                 productId: item.productId, 
@@ -102,7 +101,6 @@ const CheckoutPage = () => {
     }
 
     const onSubmit = () => {
-        console.log('submiting?');
         const order = {
             ...data,
             cart:addBasketInformationToPayInfo(),

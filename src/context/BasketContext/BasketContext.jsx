@@ -18,7 +18,6 @@ export const BasketProvider = ({children}) => {
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
-        console.log('state', state);
         const cart = JSON.stringify(state)
         localStorage.setItem('cart', cart)
     }, [state])
@@ -27,7 +26,6 @@ export const BasketProvider = ({children}) => {
         setIsLoading(true)
         const product = await productAxios.get(`/${id}`)
         if(state.items.find(item => item.productId === id)?.number >= product.data.inventory){
-            console.log('number > inventory');
             toast.error('تعداد سفارش شما از موجودی انبار بیشتر است.')
             setIsLoading(false)
             return false
@@ -55,7 +53,6 @@ export const BasketProvider = ({children}) => {
     }
 
     const changeNumberOfOrder = (id, number, difference) => {
-        console.log('id: ', id, 'number: ', number)
         dispatch({
             type: actionType.CHANGE_NUMBER_OF_PRODUCT_BASE_ON_INVENTORY,
             payload:{id, number, difference}

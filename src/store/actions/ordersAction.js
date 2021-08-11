@@ -11,7 +11,6 @@ export const setOrders = orders => {
 }
 
 export const setOrdersStatus = status => {
-    console.log(status);
     return({
         type: ActionTypes.SET_DELIVERY_STATUS,
         payload: status

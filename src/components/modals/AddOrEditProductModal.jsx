@@ -95,9 +95,7 @@ const AddOrEditProductModal = ({neadEditProduct}) => {
 
     const handleTransformImageToBase64 = (e) => {
         const file = e.target.files[0]
-        console.log(file.name);
         handleUploadingImage(file).then(res => {
-          console.log(res);
           setImage(res)
         })
     }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { FormControl, FormControlLabel, FormLabel, makeStyles, Radio, RadioGroup, Typography  } from '@material-ui/core';
 import Table from '../../components/tables/OrdersTable'
 import { useDispatch, useSelector } from 'react-redux';
@@ -32,7 +32,6 @@ const AdminPanelOrdersPage = () => {
   const ordersStatus = useSelector(state => state.orders.ordersStatus)
   const isLoading = useSelector(state => state.loading.isLoading)
 
-  console.log(ordersStatus);
   useEffect(() => {
     dispatch(getOrders())
   }, [ordersStatus])

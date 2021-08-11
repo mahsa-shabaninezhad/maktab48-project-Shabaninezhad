@@ -77,7 +77,6 @@ const QuantitiesTable = (props) => {
 
   //triger editing mode when user double click on a "price cell" or "inventory cell"
   const handleActiveEditingMode = (e, field, product) => {
-    console.log('doble clicked');
     const editablePart = field === 'price'? 'isPriceEditable' : 'isInventoryEditable'
     const newCell = {...buffer[product.id], [editablePart]: true}
     dispatch(applyCellEditingMode(product.id, newCell))
